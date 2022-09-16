@@ -15,7 +15,7 @@ required_version = ">= 0.13.0"
 # }
 
 provider "aws" {
-   region = var.a1_aws_region
+   region = "us-west-1"
    default_tags {
     tags = {
       Managedby               = "Albert Chong"  
