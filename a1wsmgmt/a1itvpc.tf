@@ -1,4 +1,4 @@
-resource "tfe_workspace" "stamps06prod01_infrastructure_vpc" {
+resource "tfe_workspace" "a1_infrastructure_vpc" {
   name              = "a1_Infrastructure_VPC"
   organization      = "albertchong"
   execution_mode    = "remote"
