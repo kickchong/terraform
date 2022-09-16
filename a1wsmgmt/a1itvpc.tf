@@ -1,17 +1,17 @@
-# resource "tfe_workspace" "stamps06prod01_infrastructure_vpc" {
-#   name              = "a1_Infrastructure_VPC"
-#   organization      = "albertchong"
-#   execution_mode    = "remote"
-#   working_directory = "a1itvpc"
-#   auto_apply        = "false"
-#   queue_all_runs    = "false"
-#   tag_names         = ["account:a1", "vpc"]
-#   vcs_repo {
-#     identifier     = "kickchong/terraform"
-#     branch         = "a1itvpc"
-#     oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names,"${var.ssmpath}/common/oauth_token_id")]
-#   }
-# }
+resource "tfe_workspace" "stamps06prod01_infrastructure_vpc" {
+  name              = "a1_Infrastructure_VPC"
+  organization      = "albertchong"
+  execution_mode    = "remote"
+  working_directory = "a1itvpc"
+  auto_apply        = "false"
+  queue_all_runs    = "false"
+  tag_names         = ["account:a1", "vpc"]
+  vcs_repo {
+    identifier     = "kickchong/terraform"
+    branch         = "a1itvpc"
+    oauth_token_id = var.oauth_token
+  }
+}
 
 # // Put resources/variables that are common to all workspaces here
 # resource "tfe_variable" "stamps06prod01_infrastructure_vpc_region" {

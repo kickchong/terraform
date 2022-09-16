@@ -3,7 +3,7 @@
 #   type        = string
 # }
 
-# variable "environment" {
-#   description = "Environment Variable for example dev02, stage02, prod02"
-#   type        = string
-# }
+variable "oauth_token" {
+  description = "Environment Variable for example dev02, stage02, prod02"
+  type        = string
+}
