@@ -14,9 +14,13 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   }
 }
 
+data "aws_ssm_parameter" "a1" {
+#  path = "${var.ssmpath}/common/oauth_token_id"
+    name = "abc"
+}
 output "name" {
 #    sensitive = true
-    value =  "${data.aws_ssm_parameter.tf_common_wsmgmt_oauth.value}"
+    value =  data.aws_ssm_parameter.a1.name
     #value = "123"
 }
 # // Put resources/variables that are common to all workspaces here

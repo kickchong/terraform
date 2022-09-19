@@ -18,7 +18,4 @@ data "aws_ssm_parameters_by_path" "tf_common_wsmgmt_oauth" {
     path = "/terraform/common/abc"
 }
 
-data "aws_ssm_parameter" "tf_common_wsmgmt_oauth" {
-#  path = "${var.ssmpath}/common/oauth_token_id"
-    name = "abc"
-}
+
