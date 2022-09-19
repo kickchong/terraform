@@ -9,7 +9,8 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   vcs_repo {
     identifier     = "kickchong/terraform"
     branch         = "a1itvpc"
-    oauth_token_id = var.oauth_token
+ #   oauth_token_id = var.oauth_token
+    oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt_oauth.values
   }
 }
 
