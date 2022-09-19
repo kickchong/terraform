@@ -9,11 +9,15 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   vcs_repo {
     identifier     = "kickchong/terraform"
     branch         = "a1itvpc"
- #   oauth_token_id = var.oauth_token
-    oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt_oauth.values
+    oauth_token_id = var.oauth_token
+   # oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt_oauth.values
   }
 }
 
+output "name" {
+    value =  data.aws_ssm_parameters_by_path.tf_common_wsmgmt_oauth.values
+  
+}
 # // Put resources/variables that are common to all workspaces here
 # resource "tfe_variable" "stamps06prod01_infrastructure_vpc_region" {
 #   key          = "stamps_aws_region"
