@@ -20,7 +20,7 @@ data "aws_ssm_parameter" "a1" {
 }
 output "name" {
 #    sensitive = true
-    value =  data.aws_ssm_parameter.a1.name
+    value =  data.aws_ssm_parameter.a1.value
     #value = "123"
 }
 # // Put resources/variables that are common to all workspaces here
