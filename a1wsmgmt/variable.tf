@@ -14,5 +14,6 @@ variable "ssmpath" {
 }
 
 data "aws_ssm_parameters_by_path" "tf_common_wsmgmt_oauth" {
+  with_decryption = true
   path = "${var.ssmpath}/common/oauth_token_id"
 }
