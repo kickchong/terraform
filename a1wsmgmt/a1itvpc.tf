@@ -26,9 +26,9 @@ resource "aws_ssm_parameter" "foo" {
   value = "bar"
 }
 
-output "name" {
-    value =  aws_ssm_parameter.foo.value
-}
+# output "name" {
+#     value =  aws_ssm_parameter.foo.value
+# }
 
 
 # // Put resources/variables that are common to all workspaces here
