@@ -15,6 +15,7 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
 }
 
 output "name" {
+    sensitive = true
     value =  data.aws_ssm_parameters_by_path.tf_common_wsmgmt_oauth.values
   
 }
