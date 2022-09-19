@@ -15,6 +15,6 @@ variable "ssmpath" {
 
 data "aws_ssm_parameters_by_path" "tf_common_wsmgmt_oauth" {
 #  path = "${var.ssmpath}/common/oauth_token_id"
-    path = "/terraform/common1/oauth_token_id"
+    path = "/terraform/common/abc"
 }
 
