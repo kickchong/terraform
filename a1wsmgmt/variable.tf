@@ -17,5 +17,3 @@ variable "ssmpath" {
 data "aws_ssm_parameters_by_path" "tf_common_wsmgmt" {
     path = "${var.ssmpath}/common/"
 }
-
-

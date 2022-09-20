@@ -32,76 +32,47 @@ resource "tfe_variable" "a1_secret_key" {
   description  = "Secret Key used by Terraform Code"
 }
 
+## Create Space for AD
+variable "ad_domain" {
+  addomain  = "sdc01qa01.aws.local"
+  condfwdip = "10.64.0.2"
+  dnszone   = "a1.aws.local"
+  }
 
-# data "aws_ssm_parameter" "a1" {
-#     name = "abc"
-# }
-# output "name" {
-#     value =  data.aws_ssm_parameter.a1.value
-# }
-# resource "aws_ssm_parameter" "foo" {
-#   name  = "foo"
-#   type  = "String"
-#   value = "bar"
-# }
+variable "domain_password" {
+  description = "Environment Variable for example dev02, stage02, prod02"
+  type        = string
+}
 
-# output "adfa" {
-#     value =  aws_ssm_parameter.foo.value
-# }
+resource "tfe_variable" "infrastructure_ad_domain_name" {
+  key          = "domain_name"
+  value        = var.ad_domain.addomain
+  category     = "terraform"
+  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  description  = "Domain Name for Directory Service"
+}
 
+resource "tfe_variable" "infrastructure_ad_domain_password" {
+  key          = "domain_password"
+  value        = var.domain_password
+  category     = "terraform"
+  sensitive    = true
+  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  description  = "Domain Password for Directory Service"
+}
 
-# // Put resources/variables that are common to all workspaces here
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_region" {
-#   key          = "stamps_aws_region"
-#   value        = "us-west-1"
-#   category     = "terraform"
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "Region variable used by Terraform Code"
-# }
+resource "tfe_variable" "infrastructure_ad_domain_cndfwdip" {
+  key          = "condfwdip"
+  value        = var.ad_domain.condfwdip
+  category     = "terraform"
+  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  description  = "Domain Name for Directory Service"
+}
 
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_environment" {
-#   key          = "environment"
-#   value        = "stamps06prod01"
-#   category     = "terraform"
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "Environment variable used by Terraform Code"
-# }
-
-
-
-# // Put resources/variables that are unique to this workspace here
-
-# variable "stamps06prod01_vpc_info" {
-#   description = "VPC details for each account"
-#   default = {
-#     "stamps06prod01" = {
-#       vpc_cidr_block = "10.107.0.0/16"
-#       vpc_name       = "stamps06prod01"
-#       billing_entity = "dev-server"
-#     }
-#   }
-# }
-
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_cidr_block" {
-#   key          = "vpc_cidr_block"
-#   value        = var.stamps06prod01_vpc_info.stamps06prod01.vpc_cidr_block
-#   category     = "terraform"
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "vpc_cidr_block variable used by Terraform Code"
-# }
-
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_name" {
-#   key          = "vpc_name"
-#   value        = var.stamps06prod01_vpc_info.stamps06prod01.vpc_name
-#   category     = "terraform"
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "vpc_name variable used by Terraform Code"
-# }
-
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_billing_entity" {
-#   key          = "billing_entity"
-#   value        = var.stamps06prod01_vpc_info.stamps06prod01.billing_entity
-#   category     = "terraform"
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "Billing Entity used for allocating costs"
-# }
+resource "tfe_variable" "infrastructure_ad_domain_dnszone" {
+  key          = "dnszone"
+  value        = var.ad_domain.dnszone
+  category     = "terraform"
+  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  description  = "Domain Name for Directory Service"
+}
