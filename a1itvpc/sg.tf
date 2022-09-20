@@ -2,7 +2,7 @@
 resource "aws_security_group" "admgmt" {
   name        = "a1-admgmt-sg"
   description = "SG for use with admgmt"
-  vpc_id      = aws_vpc.a1.id
+  vpc_id      = aws_vpc.v21qw1.id
   tags = {
     Owner = "terraform.io"
     Name  = "a1-admgmt-sg"

@@ -43,7 +43,7 @@ resource "aws_instance" "admgmt" {
     instance_type          = "m5.large"
     key_name               =  "Stamps-AWS-KP"
     subnet_id              = aws_subnet.westwebsub[0].id
-    vpc_security_group_ids = aws_security_groups.admgmt.ids
+    vpc_security_group_ids = aws_security_groups.admgmt.id
     tags = {
       "Name"        = "admgmt"
       "Description" = "Managed by terraform.io"
