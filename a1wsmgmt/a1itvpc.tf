@@ -34,10 +34,12 @@ resource "tfe_variable" "a1_secret_key" {
 
 ## Create Space for AD
 variable "ad_domain" {
-  addomain  = "sdc01qa01.aws.local"
-  condfwdip = "10.64.0.2"
-  dnszone   = "a1.aws.local"
+  default = {
+    addomain  = "a1.aws.local"
+    condfwdip = "10.64.0.2"
+    dnszone   = "a1.aws.local"
   }
+}
 
 variable "domain_password" {
   description = "Environment Variable for example dev02, stage02, prod02"
