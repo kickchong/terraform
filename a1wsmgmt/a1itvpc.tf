@@ -14,6 +14,24 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   }
 }
 
+resource "tfe_variable" "a1_aws_access_key" {
+  key          = "AWS_ACCESS_KEY_ID"
+  value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/a1_access_key")]  
+  category     = "env"
+  sensitive    = true
+  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  description  = "Access Key used by Terraform Code"
+}
+
+resource "tfe_variable" "a1_secret_key" {
+  key          = "AWS_SECRET_ACCESS_KEY"
+  value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/a1_secret_key")]
+  category     = "env"
+  sensitive    = true
+  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  description  = "Secret Key used by Terraform Code"
+}
+
 
 # data "aws_ssm_parameter" "a1" {
 #     name = "abc"
@@ -49,23 +67,7 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
 #   description  = "Environment variable used by Terraform Code"
 # }
 
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_aws_access_key" {
-#   key          = "AWS_ACCESS_KEY_ID"
-#   value        = var.stamps06prod01_access_key
-#   category     = "env"
-#   sensitive    = true
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "Access Key used by Terraform Code"
-# }
 
-# resource "tfe_variable" "stamps06prod01_infrastructure_vpc_secret_key" {
-#   key          = "AWS_SECRET_ACCESS_KEY"
-#   value        = var.stamps06prod01_secret_key
-#   category     = "env"
-#   sensitive    = true
-#   workspace_id = tfe_workspace.stamps06prod01_infrastructure_vpc.id
-#   description  = "Secret Key used by Terraform Code"
-# }
 
 # // Put resources/variables that are unique to this workspace here
 
