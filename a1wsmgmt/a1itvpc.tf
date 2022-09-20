@@ -9,27 +9,9 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   vcs_repo {
     identifier     = "kickchong/terraform"
     branch         = "a1itvpc"
-   # oauth_token_id = var.oauth_token
-   # oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt_oauth.values[0]
-   oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names,"${var.ssmpath}/common/oauth_token_id")]
+    oauth_token_id = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names,"${var.ssmpath}/common/oauth_token_id")]
  
   }
-}
-
-variable "ssmpath" {
-  type    = string
-  default = "/terraform"
-}
-
-data "aws_ssm_parameters_by_path" "tf_common_wsmgmt_oauth" {
-    path = "${var.ssmpath}/common/oauth_token_id"
-# path = "/terraform/common/abc"
-}
-
-
-data "aws_ssm_parameters_by_path" "tf_common_wsmgmt" {
-    path = "${var.ssmpath}/common/"
-# path = "/terraform/common/abc"
 }
 
 
