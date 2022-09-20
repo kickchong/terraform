@@ -8,14 +8,14 @@ variable "oauth_token" {
   type        = string
 }
 
-variable "ssmpath" {
-  type    = string
-  default = "/terraform"
-}
+# variable "ssmpath" {
+#   type    = string
+#   default = "/terraform"
+# }
 
-data "aws_ssm_parameters_by_path" "tf_common_wsmgmt_oauth" {
-#  path = "${var.ssmpath}/common/oauth_token_id"
-    path = "/terraform/common/abc"
-}
+# data "aws_ssm_parameters_by_path" "tf_common_wsmgmt_oauth" {
+# #  path = "${var.ssmpath}/common/oauth_token_id"
+#     path = "/terraform/common/abc"
+# }
 
 
