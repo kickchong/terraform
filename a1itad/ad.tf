@@ -39,7 +39,6 @@ resource "aws_directory_service_conditional_forwarder" "a1_aws_local" {
 
 ## Create AD Management server
 resource "aws_instance" "admgmt" {
-    depends_on             = [aws_security_group.admgmt]
     ami                    = "ami-0b7c10374cfb013e6"
     instance_type          = "m5.large"
     key_name               =  "Stamps-AWS-KP"

@@ -20,6 +20,10 @@ data "aws_subnet" "westwebsub" {
   
 }
 
+data "aws_security_group" "admgmt" {
+  
+}
+
 variable "domain_password" {
   description = "Domain Password"
   type        = string
