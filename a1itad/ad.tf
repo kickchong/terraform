@@ -5,7 +5,7 @@ resource "aws_directory_service_directory" "a1" {
   size        = "Small"
   description = "Managed by terraform.io"
   vpc_settings {
-    vpc_id     = aws_vpc.v21qw1.id
+    vpc_id     = data.aws_vpc.v21qw1.id
   #  subnet_ids = flatten([aws_subnet_ids.private.ids])
     subnet_ids = flatten([data.aws_subnet.westwebsub[0].id])
   }

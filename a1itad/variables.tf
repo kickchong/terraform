@@ -13,8 +13,9 @@ data "aws_vpc" "v21qw1" {
 }
 
 data "aws_subnet" "westwebsub" {
-    tags = {
-         Name = "public-us-west-1a"
+  count = "${length(data.aws_availability_zones.westzone.names)}"       
+  tags = {
+         Name = "public-${element(data.aws_availability_zones.westzone.names, count.index)}"
     }
   
 }
