@@ -5,7 +5,7 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   working_directory = "a1itvpc"
   auto_apply        = "false"
   queue_all_runs    = "false"
-  tag_names         = ["account:a1", "vpc"]
+  tag_names         = ["account:a1", "vpc", "subnet", "sg"] 
   vcs_repo {
     identifier     = "kickchong/terraform"
     branch         = "a1itvpc"
@@ -30,51 +30,4 @@ resource "tfe_variable" "a1_secret_key" {
   sensitive    = true
   workspace_id = tfe_workspace.a1_infrastructure_vpc.id
   description  = "Secret Key used by Terraform Code"
-}
-
-## Create Space for AD
-variable "ad_domain" {
-  default = {
-    addomain  = "a1.aws.local"
-    condfwdip = "10.64.0.2"
-    dnszone   = "a1.aws.local"
-  }
-}
-
-variable "domain_password" {
-  description = "Environment Variable for example dev02, stage02, prod02"
-  type        = string
-}
-
-resource "tfe_variable" "infrastructure_ad_domain_name" {
-  key          = "domain_name"
-  value        = var.ad_domain.addomain
-  category     = "terraform"
-  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
-  description  = "Domain Name for Directory Service"
-}
-
-resource "tfe_variable" "infrastructure_ad_domain_password" {
-  key          = "domain_password"
-  value        = var.domain_password
-  category     = "terraform"
-  sensitive    = true
-  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
-  description  = "Domain Password for Directory Service"
-}
-
-resource "tfe_variable" "infrastructure_ad_domain_cndfwdip" {
-  key          = "condfwdip"
-  value        = var.ad_domain.condfwdip
-  category     = "terraform"
-  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
-  description  = "Domain Name for Directory Service"
-}
-
-resource "tfe_variable" "infrastructure_ad_domain_dnszone" {
-  key          = "dnszone"
-  value        = var.ad_domain.dnszone
-  category     = "terraform"
-  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
-  description  = "Domain Name for Directory Service"
 }
