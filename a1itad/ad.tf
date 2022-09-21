@@ -7,7 +7,7 @@ resource "aws_directory_service_directory" "a1" {
   vpc_settings {
     vpc_id     = aws_vpc.v21qw1.id
   #  subnet_ids = flatten([aws_subnet_ids.private.ids])
-    subnet_ids = flatten([aws_subnet.westwebsub[0].id])
+    subnet_ids = flatten([data.aws_subnet.westwebsub[0].id])
   }
 }
 
@@ -24,7 +24,7 @@ resource "aws_vpc_dhcp_options" "this" {
 }
 
 resource "aws_vpc_dhcp_options_association" "dns_resolver" {
-  vpc_id          = aws_vpc.v21qw1.id
+  vpc_id          = data.aws_vpc.v21qw1.id
   dhcp_options_id = aws_vpc_dhcp_options.this.id
 }
 
@@ -43,8 +43,8 @@ resource "aws_instance" "admgmt" {
     ami                    = "ami-0b7c10374cfb013e6"
     instance_type          = "m5.large"
     key_name               =  "Stamps-AWS-KP"
-    subnet_id              = aws_subnet.westwebsub[0].id
-    vpc_security_group_ids = aws_security_group.admgmt.id
+    subnet_id              = data.aws_subnet.westwebsub[0].id
+    vpc_security_group_ids = data.aws_security_group.admgmt.id
     tags = {
       "Name"        = "admgmt"
       "Description" = "Managed by terraform.io"
