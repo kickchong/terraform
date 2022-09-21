@@ -38,23 +38,24 @@ resource "aws_directory_service_conditional_forwarder" "a1_aws_local" {
 }
 
 ## Create AD Management server
-# resource "aws_instance" "admgmt" {
-#     ami                    = "ami-0b7c10374cfb013e6"
-#     instance_type          = "m5.large"
-#     key_name               =  "Stamps-AWS-KP"
-#     subnet_id              = aws_subnet.westwebsub[0].id
-#     vpc_security_group_ids = aws_security_group.admgmt.id
-#     tags = {
-#       "Name"        = "admgmt"
-#       "Description" = "Managed by terraform.io"
-#     }
+resource "aws_instance" "admgmt" {
+    depends_on             = [aws_security_group.admgmt]
+    ami                    = "ami-0b7c10374cfb013e6"
+    instance_type          = "m5.large"
+    key_name               =  "Stamps-AWS-KP"
+    subnet_id              = aws_subnet.westwebsub[0].id
+    vpc_security_group_ids = aws_security_group.admgmt.id
+    tags = {
+      "Name"        = "admgmt"
+      "Description" = "Managed by terraform.io"
+    }
 
-#     user_data = <<EOF
-#     <powershell>
-#     Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "admin",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
-#     </powershell>
-#     EOF
-# }
+    user_data = <<EOF
+    <powershell>
+    Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "admin",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
+    </powershell>
+    EOF
+}
 
 # resource "aws_instance" "pwdmgmt01" {
 #     count                  = var.environment == "stamps01qa99" ? 1 : 0
