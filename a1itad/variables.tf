@@ -21,7 +21,7 @@ data "aws_subnet" "westwebsub" {
 }
 
 data "aws_security_group" "admgmt" {
-  
+    name        = "a1-admgmt-sg"
 }
 
 variable "domain_password" {
