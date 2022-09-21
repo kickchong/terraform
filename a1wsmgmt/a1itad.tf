@@ -14,7 +14,7 @@ resource "tfe_workspace" "a1_infrastructure_ad" {
   }
 }
 
-resource "tfe_variable" "a1_aws_access_key" {
+resource "tfe_variable" "a1_ad_aws_access_key" {
   key          = "AWS_ACCESS_KEY_ID"
   value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/a1_access_key")]  
   category     = "env"
@@ -23,7 +23,7 @@ resource "tfe_variable" "a1_aws_access_key" {
   description  = "Access Key used by Terraform Code"
 }
 
-resource "tfe_variable" "a1_secret_key" {
+resource "tfe_variable" "a1_ad_secret_key" {
   key          = "AWS_SECRET_ACCESS_KEY"
   value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/a1_secret_key")]
   category     = "env"
