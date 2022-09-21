@@ -21,7 +21,10 @@ data "aws_subnet" "westwebsub" {
 }
 
 data "aws_security_groups" "admgmt" {
-    name        = "a1-admgmt-sg"
+  tags = {
+    Owner = "terraform.io"
+    Name  = "a1-admgmt-sg"
+  }
 }
 
 variable "domain_password" {
