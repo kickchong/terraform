@@ -39,9 +39,9 @@ resource "aws_directory_service_conditional_forwarder" "a1_aws_local" {
 
 ## Create AD Management server
 resource "aws_instance" "admgmt" {
-    ami                    = "ami-0b7c10374cfb013e6"
-    instance_type          = "m5.large"
-    key_name               =  "Stamps-AWS-KP"
+    ami                    = "ami-031b64cec4b201110"
+    instance_type          = "t2.micro"
+    key_name               =  "awskey102021"
     subnet_id              = data.aws_subnet.westwebsub[0].id
     vpc_security_group_ids = data.aws_security_groups.admgmt.ids
     tags = {
