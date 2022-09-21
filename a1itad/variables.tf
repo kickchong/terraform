@@ -20,7 +20,7 @@ data "aws_subnet" "westwebsub" {
   
 }
 
-data "aws_security_group" "admgmt" {
+data "aws_security_groups" "admgmt" {
     name        = "a1-admgmt-sg"
 }
 
