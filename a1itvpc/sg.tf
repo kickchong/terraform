@@ -13,7 +13,7 @@ variable "admgmt_ingress_ports" {
   description = "Allowed ports on admgmt"
   default     = {
     "445"  = ["10.64.0.0/16"]
-    "3389" = ["10.64.0.0/16"]
+    "3389" = ["10.64.0.0/16","47.232.152.136/32"]
   }
 }
 
