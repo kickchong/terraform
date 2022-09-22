@@ -1,5 +1,5 @@
 provider "aws" {
-   region = "us-west-1"
+   region = "us-west-2"
    default_tags {
     tags = {
       Managedby               = "Albert Chong"  
@@ -10,11 +10,11 @@ provider "aws" {
 }
 provider "aws" {
   region     = "us-west-1"
-  alias      = "us-west"
+  alias      = "us-west-1"
 }
 provider "aws" {
   region     = "us-west-2"
-  alias      = "us-west-2"
+  alias      = "us-west"
 }
 provider "aws" {
   region     = "us-east-1"
