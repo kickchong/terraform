@@ -12,13 +12,26 @@ data "aws_vpc" "v21qw1" {
     }  
 }
 
-data "aws_subnet" "westwebsub" {
-  count = "${length(data.aws_availability_zones.westzone.names)}"       
+# data "aws_subnet" "westwebsub" {
+#   count = "${length(data.aws_availability_zones.westzone.names)}"       
+#   tags = {
+#          Name = "public-${element(data.aws_availability_zones.westzone.names, count.index)}"
+#     }
+  
+# }
+
+data "aws_subnet_ids" "private" {
+  vpc_id = data.aws_vpc.v21qw1.id
+
   tags = {
          Name = "public-${element(data.aws_availability_zones.westzone.names, count.index)}"
     }
-  
+#   filter {
+#     name   = "tag:Name"
+#     values = ["${var.environment}-private_subnet*"]
+#   }
 }
+
 
 output "t1" {
   value = data.aws_subnet.westwebsub[0].id
