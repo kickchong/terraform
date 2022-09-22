@@ -39,7 +39,7 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 
 ## Create AD Management server
 resource "aws_instance" "admgmt" {
-    ami                    = "ami-031b64cec4b201110"
+    ami                    = "ami-0df583d5f9d8e6cda"
     instance_type          = "t2.micro"
     key_name               =  "awskey102021"
     subnet_id              = data.aws_subnet.westwebsub[0].id
