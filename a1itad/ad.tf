@@ -38,23 +38,23 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 # }
 
 ## Create AD Management server
-# resource "aws_instance" "admgmt" {
-#     ami                    = "ami-0df583d5f9d8e6cda"
-#     instance_type          = "t2.micro"
-#     key_name               =  "0922RDP"
-#     subnet_id              = data.aws_subnet.westwebsub[0].id
-#     vpc_security_group_ids = data.aws_security_groups.admgmt.ids
-#     tags = {
-#       "Name"        = "admgmt"
-#       "Description" = "Managed by terraform.io"
-#     }
+resource "aws_instance" "admgmt" {
+    ami                    = "ami-0df583d5f9d8e6cda"
+    instance_type          = "t2.micro"
+    key_name               =  "0922RDP"
+    subnet_id              = data.aws_subnet.westwebsub[0].id
+    vpc_security_group_ids = data.aws_security_groups.admgmt.ids
+    tags = {
+      "Name"        = "admgmt"
+      "Description" = "Managed by terraform.io"
+    }
 
-#     user_data = <<EOF
-#     <powershell>
-#     Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "administrator",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
-#     </powershell>
-#     EOF
-# }
+    user_data = <<EOF
+    <powershell>
+    Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "administrator",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
+    </powershell>
+    EOF
+}
 
 # resource "aws_eip" "lb" {
 #   instance = aws_instance.admgmt.id
