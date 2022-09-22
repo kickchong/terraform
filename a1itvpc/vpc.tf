@@ -46,3 +46,27 @@ resource "aws_subnet" "eastwebsub" {
          Name = "public-${element(data.aws_availability_zones.eastzone.names, count.index)}"
     }
 }
+
+
+resource "aws_internet_gateway" "aws2021westgateway" {
+    provider = aws.us-west
+    vpc_id = aws_vpc.v21qw1.id
+    tags = {
+        Name = "aws2021 west gateway"
+    } 
+}
+
+
+resource "aws_route_table" "aws2021westdefaultgw" {
+    provider = aws.us-west
+    vpc_id = aws_vpc.v21qw1.id
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.aws2021westgateway.id
+    }
+    tags = {
+      Name = "aws2021 west default gateway"
+    }
+  
+}
+
