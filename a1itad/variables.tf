@@ -21,6 +21,7 @@ data "aws_vpc" "v21qw1" {
 # }
 
 data "aws_subnet_ids" "private" {
+  count = "${length(data.aws_availability_zones.westzone.names)}" 
   vpc_id = data.aws_vpc.v21qw1.id
 
   tags = {
@@ -33,10 +34,10 @@ data "aws_subnet_ids" "private" {
 }
 
 
-output "t1" {
-  value = data.aws_subnet.westwebsub[0].id
+# output "t1" {
+#   value = data.aws_subnet.westwebsub[0].id
   
-}
+# }
 
 data "aws_security_groups" "admgmt" {
   tags = {
