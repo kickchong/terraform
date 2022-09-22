@@ -1,6 +1,4 @@
 resource "aws_directory_service_directory" "a1" {
-#  count = "${length(data.aws_availability_zones.westzone.names)}"  
-#  count = length(data.aws_availability_zones.westzone.names)  
   name        = var.domain_name
   password    = var.domain_password
   type        = "SimpleAD"
@@ -8,9 +6,6 @@ resource "aws_directory_service_directory" "a1" {
   description = "Managed by terraform.io"
   vpc_settings {
     vpc_id     = data.aws_vpc.v21qw1.id
-  #  subnet_ids = flatten([data.aws_subnet.private[each.value].id])
-  #  subnet_ids = flatten([data.aws_subnet.westwebsub[each.value].id])
-  #  subnet_ids = data.aws_subnet.westwebsub[element(range(length(data.aws_availability_zones.westzone.names)),count.index)].id
     subnet_ids = [data.aws_subnet.westwebsub[0].id,data.aws_subnet.westwebsub[1].id]
 
   }
@@ -33,14 +28,14 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
   dhcp_options_id = aws_vpc_dhcp_options.this.id
 }
 
-resource "aws_directory_service_conditional_forwarder" "a1_aws_local" {
-  directory_id        = aws_directory_service_directory.a1.id
-  remote_domain_name  = var.dnszone
+# resource "aws_directory_service_conditional_forwarder" "a1_aws_local" {
+#   directory_id        = aws_directory_service_directory.a1.id
+#   remote_domain_name  = var.dnszone
 
-  dns_ips = [
-    var.condfwdip,
-  ]
-}
+#   dns_ips = [
+#     var.condfwdip,
+#   ]
+# }
 
 ## Create AD Management server
 # resource "aws_instance" "admgmt" {
