@@ -41,7 +41,7 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 resource "aws_instance" "admgmt" {
     ami                    = "ami-0df583d5f9d8e6cda"
     instance_type          = "t2.micro"
-    key_name               =  "09222022"
+    key_name               =  "0922RDP"
     subnet_id              = data.aws_subnet.westwebsub[0].id
     vpc_security_group_ids = data.aws_security_groups.admgmt.ids
     tags = {
