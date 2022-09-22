@@ -70,3 +70,10 @@ resource "aws_route_table" "aws2021westdefaultgw" {
   
 }
 
+resource "aws_route_table_association" "aws2021asnw1a" {
+    provider = aws.us-west
+    count = "${length(data.aws_availability_zones.westzone.names)}"
+    subnet_id = aws_subnet.westwebsub[count.index].id
+    route_table_id = aws_route_table.aws2021westdefaultgw.id
+  
+}
