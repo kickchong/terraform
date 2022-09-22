@@ -56,10 +56,10 @@ resource "aws_instance" "admgmt" {
     EOF
 }
 
-resource "aws_eip" "lb" {
-  instance = aws_instance.admgmt.id
-  vpc      = true
-}
+# resource "aws_eip" "lb" {
+#   instance = aws_instance.admgmt.id
+#   vpc      = true
+# }
 
 # resource "aws_instance" "pwdmgmt01" {
 #     count                  = var.environment == "stamps01qa99" ? 1 : 0
