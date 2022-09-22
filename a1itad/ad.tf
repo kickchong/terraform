@@ -1,5 +1,6 @@
 resource "aws_directory_service_directory" "a1" {
-  count = "${length(data.aws_availability_zones.westzone.names)}"  
+#  count = "${length(data.aws_availability_zones.westzone.names)}"  
+  count = length(data.aws_availability_zones.westzone.names)  
   name        = var.domain_name
   password    = var.domain_password
   type        = "SimpleAD"
@@ -8,8 +9,8 @@ resource "aws_directory_service_directory" "a1" {
   vpc_settings {
     vpc_id     = data.aws_vpc.v21qw1.id
   #  subnet_ids = flatten([data.aws_subnet.private[each.value].id])
-    subnet_ids = flatten([data.aws_subnet.westwebsub[each.value].id])
-  #  subnet_ids = data.aws_subnet.westwebsub[0].id
+  #  subnet_ids = flatten([data.aws_subnet.westwebsub[each.value].id])
+    subnet_ids = data.aws_subnet.westwebsub[element(range(length(data.aws_availability_zones.westzone.names)),count.index)].id
 
   }
 }
