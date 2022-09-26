@@ -35,9 +35,9 @@ resource "tfe_variable" "a1_ad_secret_key" {
 ## Create Space for AD
 variable "ad_domain" {
   default = {
-    addomain  = "a1.aws.local"
+    addomain  = "a1.chonglife.com"
     condfwdip = "10.64.0.2"
-    dnszone   = "a1.aws.local"
+    dnszone   = "a1.chonglife.com"
   }
 }
 
