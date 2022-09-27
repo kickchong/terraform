@@ -45,6 +45,7 @@ resource "aws_instance" "admgmt" {
     <powershell>
     Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "administrator",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
     Install-WindowsFeature -Name "RSAT-AD-PowerShell" -IncludeAllSubFeature
+    Add-WindowsCapability -Online -Name Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0
     </powershell>
     EOF
 }
