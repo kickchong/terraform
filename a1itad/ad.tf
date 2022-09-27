@@ -2,7 +2,7 @@ resource "aws_directory_service_directory" "a1" {
   name        = var.domain_name
   password    = var.domain_password
   type        = "MicrosoftAD"
-  size        = "Small"
+#  size        = "Small"
   description = "Managed by terraform.io"
   vpc_settings {
     vpc_id     = data.aws_vpc.v21qw1.id
