@@ -6,8 +6,8 @@ resource "aws_directory_service_directory" "a1" {
   description = "Managed by terraform.io"
   vpc_settings {
     vpc_id     = data.aws_vpc.v21qw1.id
-    subnet_ids = [data.aws_subnet.westwebsub[0].id]
-#    subnet_ids = [data.aws_subnet.westwebsub[0].id,data.aws_subnet.westwebsub[1].id]
+#    subnet_ids = [data.aws_subnet.westwebsub[0].id]
+    subnet_ids = [data.aws_subnet.westwebsub[0].id,data.aws_subnet.westwebsub[1].id]
 
   }
 }
