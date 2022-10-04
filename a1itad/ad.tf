@@ -1,52 +1,52 @@
-resource "aws_directory_service_directory" "a1" {
-  name        = var.domain_name
-  password    = var.domain_password
-  type        = "MicrosoftAD"
-  description = "Managed by terraform.io"
-  vpc_settings {
-    vpc_id     = data.aws_vpc.v21qw1.id
-    subnet_ids = [data.aws_subnet.westwebsub[0].id,data.aws_subnet.westwebsub[1].id]
+# resource "aws_directory_service_directory" "a1" {
+#   name        = var.domain_name
+#   password    = var.domain_password
+#   type        = "MicrosoftAD"
+#   description = "Managed by terraform.io"
+#   vpc_settings {
+#     vpc_id     = data.aws_vpc.v21qw1.id
+#     subnet_ids = [data.aws_subnet.westwebsub[0].id,data.aws_subnet.westwebsub[1].id]
 
-  }
-}
+#   }
+# }
 
-#NTP Servers are pointing to US National Institute of Standards and Technology: time-a-g.nist.gov
-resource "aws_vpc_dhcp_options" "this" {
-  domain_name          = var.domain_name
-  domain_name_servers  = aws_directory_service_directory.a1.dns_ip_addresses
-  ntp_servers          = ["129.6.15.28","129.6.15.29"]
+# #NTP Servers are pointing to US National Institute of Standards and Technology: time-a-g.nist.gov
+# resource "aws_vpc_dhcp_options" "this" {
+#   domain_name          = var.domain_name
+#   domain_name_servers  = aws_directory_service_directory.a1.dns_ip_addresses
+#   ntp_servers          = ["129.6.15.28","129.6.15.29"]
 
-  tags = {
-    Name        = var.domain_name
-    description =  "Managed by terraform.io"
-  }
-}
+#   tags = {
+#     Name        = var.domain_name
+#     description =  "Managed by terraform.io"
+#   }
+# }
 
-resource "aws_vpc_dhcp_options_association" "dns_resolver" {
-  vpc_id          = data.aws_vpc.v21qw1.id
-  dhcp_options_id = aws_vpc_dhcp_options.this.id
-}
+# resource "aws_vpc_dhcp_options_association" "dns_resolver" {
+#   vpc_id          = data.aws_vpc.v21qw1.id
+#   dhcp_options_id = aws_vpc_dhcp_options.this.id
+# }
 
-## Create AD Management server
-resource "aws_instance" "admgmt" {
-    depends_on         = [aws_directory_service_directory.a1]
-    ami                    = "ami-0df583d5f9d8e6cda"
-    instance_type          = "t2.large"
-    key_name               =  "0922RDP"
-    subnet_id              = data.aws_subnet.westwebsub[0].id
-    vpc_security_group_ids = data.aws_security_groups.admgmt.ids
-    tags = {
-      "Name"        = "admgmt"
-      "Description" = "Managed by terraform.io"
-    }
+# ## Create AD Management server
+# resource "aws_instance" "admgmt" {
+#     depends_on         = [aws_directory_service_directory.a1]
+#     ami                    = "ami-0df583d5f9d8e6cda"
+#     instance_type          = "t2.large"
+#     key_name               =  "0922RDP"
+#     subnet_id              = data.aws_subnet.westwebsub[0].id
+#     vpc_security_group_ids = data.aws_security_groups.admgmt.ids
+#     tags = {
+#       "Name"        = "admgmt"
+#       "Description" = "Managed by terraform.io"
+#     }
 
-    user_data = <<EOF
-    <powershell>
-    Add-WindowsCapability -Online -Name "Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0"
-    Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "admin",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
-    </powershell>
-    EOF
-}
+#     user_data = <<EOF
+#     <powershell>
+#     Add-WindowsFeature RSAT-ADDS-Tools
+#     Add-Computer -DomainName ${var.domain_name} -NewName "admgmt" -Credential (New-Object -TypeName PSCredential -ArgumentList "admin",(ConvertTo-SecureString -String ${var.domain_password} -AsPlainText -Force)[0]) -Restart
+#     </powershell>
+#     EOF
+# }
 
 
 
