@@ -5,7 +5,7 @@
 
 resource "aws_vpc" "v21qw1" {
     count                   = var.env == "albert" || var.accounts == "kick" ? 1 : 0
-    cidr_block              = each.value.cidr_block_w
+    cidr_block              = "10.64.0.0/16"
     enable_dns_support      = "true"
     enable_dns_hostnames    = "true"
     tags = {
@@ -15,7 +15,7 @@ resource "aws_vpc" "v21qw1" {
 resource "aws_vpc" "v21qe1" {
     count                   = var.env == "albert" || var.accounts == "kick" ? 1 : 0
     provider                = aws.us-east
-    cidr_block              = each.value.cidr_block_e
+    cidr_block              = "10.80.0.0/16"
     enable_dns_support      = "true"
     enable_dns_hostnames    = "true"
     tags = {
