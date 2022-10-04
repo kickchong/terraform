@@ -6,6 +6,10 @@ data "aws_availability_zones" "eastzone" {
     provider = aws.us-east
 }
 
+variable "env" {
+  type = "string"
+}
+
 variable "accounts" {
   description = "List of AWS Accounts to target"
   default = {

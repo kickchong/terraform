@@ -4,7 +4,7 @@
 # }
 
 resource "aws_vpc" "v21qw1" {
-    for_each                = var.accounts == "albert" || var.accounts == "kick" ? 1 : 0
+    for_each                = var.env == "albert" || var.accounts == "kick" ? 1 : 0
     cidr_block              = each.value.cidr_block_w
     enable_dns_support      = "true"
     enable_dns_hostnames    = "true"
@@ -13,7 +13,7 @@ resource "aws_vpc" "v21qw1" {
     }
 }
 resource "aws_vpc" "v21qe1" {
-    for_each                = var.accounts == "albert" || var.accounts == "kick" ? 1 : 0
+    for_each                = var.env == "albert" || var.accounts == "kick" ? 1 : 0
     provider                = aws.us-east
     cidr_block              = each.value.cidr_block_e
     enable_dns_support      = "true"
