@@ -26,6 +26,7 @@ resource "tfe_variable" "a1_vpc_aws_access_key" {
 }
 
 resource "tfe_variable" "a1_vpc_secret_key" {
+  for_each     = var.accounts
   key          = "AWS_SECRET_ACCESS_KEY"
   value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/${each.value.env}_secret_key")]
   category     = "env"
