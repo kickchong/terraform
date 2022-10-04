@@ -17,3 +17,17 @@ variable "ssmpath" {
 data "aws_ssm_parameters_by_path" "tf_common_wsmgmt" {
     path = "${var.ssmpath}/common/"
 }
+
+variable "accounts" {
+  description = "List of AWS Accounts to target"
+  default = {
+    "albert" = {
+      env = "a1"
+      r53branch = "Infrastructure-Route53"
+    },
+    "kick" = {
+      env = "k1"
+      r53branch = "Infrastructure-Route53"
+    }  
+  }
+}
