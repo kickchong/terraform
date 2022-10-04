@@ -3,25 +3,25 @@
 #   value = "${element(data.aws_availability_zones.westzone.names,1)}"
 # }
 
-resource "aws_vpc" "v21qw1" {
-    for_each                = var.accounts
-    cidr_block              = each.value.cidr_block_w
-    enable_dns_support      = "true"
-    enable_dns_hostnames    = "true"
-    tags = {
-         Name = "v21qw1"
-    }
-}
-resource "aws_vpc" "v21qe1" {
-    for_each                = var.accounts
-    provider                = aws.us-east
-    cidr_block              = each.value.cidr_block_e
-    enable_dns_support      = "true"
-    enable_dns_hostnames    = "true"
-    tags = {
-         Name = "v21qe1"
-    }
-}
+# resource "aws_vpc" "v21qw1" {
+#     for_each                = var.accounts
+#     cidr_block              = each.value.cidr_block_w
+#     enable_dns_support      = "true"
+#     enable_dns_hostnames    = "true"
+#     tags = {
+#          Name = "v21qw1"
+#     }
+# }
+# resource "aws_vpc" "v21qe1" {
+#     for_each                = var.accounts
+#     provider                = aws.us-east
+#     cidr_block              = each.value.cidr_block_e
+#     enable_dns_support      = "true"
+#     enable_dns_hostnames    = "true"
+#     tags = {
+#          Name = "v21qe1"
+#     }
+# }
 
 # resource "aws_subnet" "westwebsub" {
 #     for_each                = var.accounts  == "albert" || var.accounts == "kick" ? 1 : 0
