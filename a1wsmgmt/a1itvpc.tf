@@ -15,6 +15,15 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
   }
 }
 
+resource "tfe_variable" "infrastructure_env" {
+  for_each     = var.stamps01_accounts_new
+  key          = "env"
+  value        = each.key
+  category     = "terraform"
+  workspace_id = tfe_workspace.projects_tafcreditservice[each.key].id
+  description  = "Environment variable used by Terraform Code"
+}
+
 resource "tfe_variable" "a1_vpc_aws_access_key" {
   for_each     = var.accounts
   key          = "AWS_ACCESS_KEY_ID"
