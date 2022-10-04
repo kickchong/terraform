@@ -21,7 +21,7 @@ resource "tfe_variable" "a1_vpc_aws_access_key" {
   value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/${each.value.env}_access_key")]  
   category     = "env"
   sensitive    = true
-  workspace_id = tfe_workspace.a1_infrastructure_vpc[each.value.env].id
+  workspace_id = tfe_workspace.a1_infrastructure_vpc[each.key].id
   description  = "Access Key used by Terraform Code"
 }
 
@@ -31,6 +31,6 @@ resource "tfe_variable" "a1_vpc_secret_key" {
   value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/${each.value.env}_secret_key")]
   category     = "env"
   sensitive    = true
-  workspace_id = tfe_workspace.a1_infrastructure_vpc[each.value.env].id
+  workspace_id = tfe_workspace.a1_infrastructure_vpc[each.key].id
   description  = "Secret Key used by Terraform Code"
 }
