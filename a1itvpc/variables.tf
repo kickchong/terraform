@@ -7,7 +7,7 @@ data "aws_availability_zones" "eastzone" {
 }
 
 variable "env" {
-  type = "string"
+  type = string
 }
 
 variable "accounts" {
