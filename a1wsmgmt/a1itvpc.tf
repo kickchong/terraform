@@ -16,7 +16,7 @@ resource "tfe_workspace" "a1_infrastructure_vpc" {
 }
 
 resource "tfe_variable" "infrastructure_env" {
-  for_each     = var.stamps01_accounts_new
+  for_each     = var.accounts
   key          = "env"
   value        = each.key
   category     = "terraform"
