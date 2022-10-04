@@ -20,7 +20,7 @@ resource "tfe_variable" "infrastructure_env" {
   key          = "env"
   value        = each.key
   category     = "terraform"
-  workspace_id = tfe_workspace.projects_tafcreditservice[each.key].id
+  workspace_id = tfe_workspace.a1_infrastructure_vpc[each.key].id
   description  = "Environment variable used by Terraform Code"
 }
 
