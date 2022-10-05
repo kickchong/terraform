@@ -25,7 +25,7 @@ resource "aws_vpc" "v21qe1" {
 
 resource "aws_subnet" "westwebsub1" {
     count                   = var.accounts  == "albert" || var.accounts == "kick" ? 1 : 0
-    vpc_id                  = aws_vpc.v21qw1.id
+    vpc_id                  = aws_vpc.v21qw1[count.index].id
     cidr_block              = "10.64.0.0/24"
     map_public_ip_on_launch = "true"
     tags = {
@@ -34,8 +34,8 @@ resource "aws_subnet" "westwebsub1" {
 }
 resource "aws_subnet" "westwebsub2" {
     count                   = var.accounts  == "albert" || var.accounts == "kick" ? 1 : 0
-    vpc_id                  = aws_vpc.v21qw1.id
-    cidr_block              = "10.66.0.0/24"
+    vpc_id                  = aws_vpc.v21qe1[count.index].id
+    cidr_block              = "10.80.0.0/24"
     map_public_ip_on_launch = "true"
     tags = {
          Name = "public-westwebsub2"
