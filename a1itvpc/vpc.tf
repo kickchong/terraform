@@ -23,19 +23,25 @@ resource "aws_vpc" "v21qe1" {
     }
 }
 
-# resource "aws_subnet" "westwebsub" {
-#     for_each                = var.accounts  == "albert" || var.accounts == "kick" ? 1 : 0
-#     count                   = "${length(data.aws_availability_zones.westzone.names)}"
-#     vpc_id                  = aws_vpc.v21qw1[each.key].id
-#     provider                = aws.us-west
-#     cidr_block              = "10.64.${count.index}.0/24"
-#     map_public_ip_on_launch = "true"
-#     availability_zone       = "${element(data.aws_availability_zones.westzone.names,count.index)}"
+resource "aws_subnet" "westwebsub1" {
+    count                   = var.accounts  == "albert" || var.accounts == "kick" ? 1 : 0
+    vpc_id                  = aws_vpc.v21qw1.id
+    cidr_block              = "10.64.0.0/24"
+    map_public_ip_on_launch = "true"
+    tags = {
+         Name = "public-westwebsub1"
+    }
+}
+resource "aws_subnet" "westwebsub2" {
+    count                   = var.accounts  == "albert" || var.accounts == "kick" ? 1 : 0
+    vpc_id                  = aws_vpc.v21qw1.id
+    cidr_block              = "10.66.0.0/24"
+    map_public_ip_on_launch = "true"
+    tags = {
+         Name = "public-westwebsub2"
+    }
+}
 
-#     tags = {
-#          Name = "public-${element(data.aws_availability_zones.westzone.names, count.index)}"
-#     }
-# }
 
 
 # resource "aws_subnet" "westwebsub2" {
