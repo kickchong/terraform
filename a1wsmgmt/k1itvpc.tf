@@ -28,7 +28,7 @@ resource "tfe_variable" "k1_vpc_secret_key" {
   value        = data.aws_ssm_parameters_by_path.tf_common_wsmgmt.values[index(data.aws_ssm_parameters_by_path.tf_common_wsmgmt.names, "${var.ssmpath}/common/k1_secret_key")]
   category     = "env"
   sensitive    = true
-  workspace_id = tfe_workspace.a1_infrastructure_vpc.id
+  workspace_id = tfe_workspace.k1_infrastructure_vpc.id
   description  = "Secret Key used by Terraform Code"
 }
 
