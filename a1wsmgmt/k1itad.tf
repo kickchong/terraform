@@ -32,7 +32,7 @@ resource "tfe_variable" "k1_ad_secret_key" {
 }
 
 ## Create Space for AD
-variable "ad_domain" {
+variable "ad_domain_k1" {
   default = {
     addomain  = "k1.chonglife.com"
     condfwdip = "10.128.0.2"
@@ -40,12 +40,12 @@ variable "ad_domain" {
   }
 }
 
-variable "domain_password" {
-  description = "Environment Variable for example dev02, stage02, prod02"
-  type        = string
-}
+# variable "domain_password" {
+#   description = "Environment Variable for example dev02, stage02, prod02"
+#   type        = string
+# }
 
-resource "tfe_variable" "infrastructure_ad_domain_name" {
+resource "tfe_variable" "infrastructure_ad_domain_name_k1" {
   key          = "domain_name"
   value        = var.ad_domain.addomain
   category     = "terraform"
@@ -53,7 +53,7 @@ resource "tfe_variable" "infrastructure_ad_domain_name" {
   description  = "Domain Name for Directory Service"
 }
 
-resource "tfe_variable" "infrastructure_ad_domain_password" {
+resource "tfe_variable" "infrastructure_ad_domain_password_k1" {
   key          = "domain_password"
   value        = var.domain_password
   category     = "terraform"
@@ -62,7 +62,7 @@ resource "tfe_variable" "infrastructure_ad_domain_password" {
   description  = "Domain Password for Directory Service"
 }
 
-resource "tfe_variable" "infrastructure_ad_domain_cndfwdip" {
+resource "tfe_variable" "infrastructure_ad_domain_cndfwdip_k1" {
   key          = "condfwdip"
   value        = var.ad_domain.condfwdip
   category     = "terraform"
@@ -70,7 +70,7 @@ resource "tfe_variable" "infrastructure_ad_domain_cndfwdip" {
   description  = "Domain Name for Directory Service"
 }
 
-resource "tfe_variable" "infrastructure_ad_domain_dnszone" {
+resource "tfe_variable" "infrastructure_ad_domain_dnszone_k1" {
   key          = "dnszone"
   value        = var.ad_domain.dnszone
   category     = "terraform"
