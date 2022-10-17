@@ -6,19 +6,19 @@ data "aws_availability_zones" "eastzone" {
     provider = aws.us-east
 }
 
-data "aws_vpc" "v21qw1" {
-    tags = {
-         Name = "v21qw1"
-    }  
-}
+# data "aws_vpc" "v21qw1" {
+#     tags = {
+#          Name = "v21qw1"
+#     }  
+# }
 
-data "aws_subnet" "westwebsub" {
-  count = "${length(data.aws_availability_zones.westzone.names)}"       
-  tags = {
-         Name = "public-${element(data.aws_availability_zones.westzone.names, count.index)}"
-    }
+# data "aws_subnet" "westwebsub" {
+#   count = "${length(data.aws_availability_zones.westzone.names)}"       
+#   tags = {
+#          Name = "public-${element(data.aws_availability_zones.westzone.names, count.index)}"
+#     }
   
-}
+# }
 
 
 
