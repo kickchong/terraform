@@ -2,13 +2,12 @@ resource "aws_s3_bucket" "chonglife" {
     provider = aws.us-west
     bucket = "www.chonglife.com"
 }
-
 resource "aws_s3_object" "lambda_hello_world" {
     provider = aws.us-west
     bucket = aws_s3_bucket.chonglife.id
     key = "hwjs.zip"
-    source = data.archive_file.lambda_hello_world.output_path
-    etag = filemd5(data.archive_file.lambda_hello_world.output_path)
+    source = "./hwjs/hwjs.zip"
+    etag = filemd5("./hwjs/hwjs.zip")
   
 }
 
