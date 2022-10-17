@@ -25,30 +25,30 @@ data "aws_subnet" "westwebsub" {
   
 # }
 
-data "aws_security_groups" "admgmt" {
-  tags = {
-    Owner = "terraform.io"
-    Name  = "a1-admgmt-sg"
-  }
-}
+# data "aws_security_groups" "admgmt" {
+#   tags = {
+#     Owner = "terraform.io"
+#     Name  = "a1-admgmt-sg"
+#   }
+# }
 
-variable "domain_password" {
-  description = "Domain Password"
-  type        = string
-}
+# variable "domain_password" {
+#   description = "Domain Password"
+#   type        = string
+# }
 
-variable "domain_name" {
-  description = "Domain Name"
-  type        = string
-}
+# variable "domain_name" {
+#   description = "Domain Name"
+#   type        = string
+# }
 
-variable "condfwdip" {
-  description = "Conditional Forward IP for local R53 zone"
-  type        = string
-}
+# variable "condfwdip" {
+#   description = "Conditional Forward IP for local R53 zone"
+#   type        = string
+# }
 
-variable "dnszone" {
-  description = "Local 53 DNS domain name"
-  type        = string
-}
+# variable "dnszone" {
+#   description = "Local 53 DNS domain name"
+#   type        = string
+# }
 
