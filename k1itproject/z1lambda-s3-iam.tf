@@ -3,13 +3,6 @@ resource "aws_s3_bucket" "chonglife" {
     bucket = "www.chonglife.com"
 }
 
-data "archive_file" "lambda_hello_world" {
-    type = "zip"
-    source_dir = "${path.module}/hwjs"
-    output_path = "${path.module}/hwjs.zip"
-  
-}
-
 resource "aws_s3_object" "lambda_hello_world" {
     provider = aws.us-west
     bucket = aws_s3_bucket.chonglife.id
