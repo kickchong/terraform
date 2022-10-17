@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "chonglife" {
     provider = aws.us-west
-    bucket = "www.${var.bucket_name}"
+    bucket = "www.chonglife.com"
  #   acl = "public-read"
 
     website {

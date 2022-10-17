@@ -20,6 +20,8 @@ data "aws_subnet" "westwebsub" {
   
 }
 
+
+
 # output "t1" {
 #   value = data.aws_subnet.westwebsub[0].id
   
