@@ -18,6 +18,11 @@ resource "aws_s3_object" "lambda_hello_world" {
   
 }
 
+output "name" {
+    value = var.AWS_ACCESS_KEY_ID
+  
+}
+
 # resource "aws_iam_role" "lambda_exec" {
 #     provider = aws.us-west
 #     name = "serverless_lambda"
