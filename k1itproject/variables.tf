@@ -49,8 +49,5 @@ data "aws_availability_zones" "eastzone" {
 #   type        = string
 # }
 
-variable "AWS_ACCESS_KEY_ID" {
-  description = "Local 53 DNS domain name"
-  type        = string
-}
+
 
