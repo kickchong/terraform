@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "chonglife" {
     provider = aws.us-west
-    bucket = "www.chonglife.com"
+    bucket = "kick.chonglife.com"
 }
 
 data "archive_file" "lambda_hello_world" {
