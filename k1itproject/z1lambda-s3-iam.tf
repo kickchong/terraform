@@ -1,23 +1,23 @@
-# resource "aws_s3_bucket" "chonglife" {
-#     provider = aws.us-west
-#     bucket = "kick.chonglife.com"
-# }
+resource "aws_s3_bucket" "chonglife" {
+    provider = aws.us-west
+    bucket = "kick.chonglife.com"
+}
 
-# data "archive_file" "lambda_hello_world" {
-#     type = "zip"
-#     source_dir = "${path.module}/hwjs"
-#     output_path = "${path.module}/hwjs.zip"
+data "archive_file" "lambda_hello_world" {
+    type = "zip"
+    source_dir = "${path.module}/hwjs"
+    output_path = "${path.module}/hwjs.zip"
   
-# }
+}
 
-# resource "aws_s3_object" "lambda_hello_world" {
-#     provider = aws.us-west
-#     bucket = aws_s3_bucket.chonglife.id
-#     key = "hwjs.zip"
-#     source = data.archive_file.lambda_hello_world.output_path
-#     etag = filemd5(data.archive_file.lambda_hello_world.output_path)
+resource "aws_s3_object" "lambda_hello_world" {
+    provider = aws.us-west
+    bucket = aws_s3_bucket.chonglife.id
+    key = "hwjs.zip"
+    source = data.archive_file.lambda_hello_world.output_path
+    etag = filemd5(data.archive_file.lambda_hello_world.output_path)
   
-# }
+}
 
 
 # resource "aws_iam_role" "lambda_exec" {
